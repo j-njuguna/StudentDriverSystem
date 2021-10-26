@@ -11,9 +11,10 @@ repositories {
 }
 
 dependencies {
+    implementation 'joda-time:joda-time:2.10.12'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    implementation 'com.github.j-njuguna:StudentRegSystem:v1.0'
+    implementation 'com.github.j-njuguna:StudentRegSystem:v1.2'
 }
 
 test {
