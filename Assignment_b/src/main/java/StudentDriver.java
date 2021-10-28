@@ -9,11 +9,11 @@ public class StudentDriver {
     public static void main(String args[]) {
 
         //create 5 students
-        Student mary = new Student(18280070, "Joy", 20, "05/03/2001");
-        Student john = new Student(18278070, "Brian", 21, "05/03/2000");
-        Student james = new Student(18289970, "Jessie", 22, "05/03/1999");
-        Student kerry = new Student(18297070, "Olivia", 20, "05/03/2001");
-        Student simon = new Student(18290070, "Gabriel", 21, "05/03/2000");
+        Student mary = new Student(18280070, "Mary", 20, "05/03/2001");
+        Student john = new Student(18278070, "John", 21, "05/03/2000");
+        Student james = new Student(18289970, "James", 22, "05/03/1999");
+        Student kerry = new Student(18297070, "Kerry", 20, "05/03/2001");
+        Student simon = new Student(18290070, "Simon", 21, "05/03/2000");
 
         //create a list for the students, then add the students to the list
         List<Student> listStudent = new ArrayList<>();
@@ -42,7 +42,6 @@ public class StudentDriver {
         softwareEngineering.addStudents(mary);
         softwareEngineering.addStudents(john);
         machineLearning.addStudents(mary);
-        machineLearning.addStudents(simon);
         machineLearning.addStudents(john);
         informationRetrieval.addStudents(james);
         informationRetrieval.addStudents(simon);
@@ -50,25 +49,8 @@ public class StudentDriver {
         professionalSkills.addStudents(kerry);
         professionalSkills.addStudents(mary);
         professionalSkills.addStudents(john);
-        systemsModelling.addStudents(kerry);
         systemsModelling.addStudents(mary);
         systemsModelling.addStudents(simon);
-
-        //right way to add
-        mary.addModules(softwareEngineering);
-        john.addModules(softwareEngineering);
-        mary.addModules(machineLearning);
-        simon.addModules(machineLearning);
-        john.addModules(machineLearning);
-        james.addModules(informationRetrieval);
-        simon.addModules(informationRetrieval);
-        kerry.addModules(informationRetrieval);
-        kerry.addModules(professionalSkills);
-        mary.addModules(professionalSkills);
-        john.addModules(professionalSkills);
-        kerry.addModules(systemsModelling);
-        mary.addModules(systemsModelling);
-        simon.addModules(systemsModelling);
 
 
         //create courses
@@ -82,52 +64,63 @@ public class StudentDriver {
         listCourses.add(engineering);
         listCourses.add(informationTechnology);
 
-        //add the modules to the courses
-        computerScience.addModules(softwareEngineering);
-        computerScience.addModules(machineLearning);
-        engineering.addModules(informationRetrieval);
-        engineering.addModules(professionalSkills);
-        informationTechnology.addModules(systemsModelling);
-        informationTechnology.addModules(informationRetrieval);
-
+        //add courses to modules
         softwareEngineering.addCourses(computerScience);
         machineLearning.addCourses(computerScience);
-        informationRetrieval.addCourses(engineering);
+        //informationRetrieval.addCourses(engineering);
         professionalSkills.addCourses(engineering);
         systemsModelling.addCourses(informationTechnology);
         informationRetrieval.addCourses(informationTechnology);
 
+        //add student to course
+        computerScience.addStudents(mary);
+        computerScience.addStudents(john);
+        computerScience.addStudents(james);
+        computerScience.addStudents(simon);
+
+        engineering.addStudents(mary);
+        engineering.addStudents(john);
+        engineering.addStudents(james);
+        engineering.addStudents(kerry);
+
+        informationTechnology.addStudents(mary);
+        informationTechnology.addStudents(john);
+        informationTechnology.addStudents(kerry);
+        informationTechnology.addStudents(simon);
+
 
         System.out.println("List of courses with their respective modules" );
+        //loop through the list of course objects
         for (Course course : listCourses){
             System.out.println(course.getCourseName());
+            //loop through the list of module objects
             for (Module module : listModules) {
                 //check if module belongs to the course
                 if (module.getCourses().contains(course)) {
+                    //print out the modules associated with the course
                     System.out.println(" " +module.getModuleName());
                 }
             }
         }
+
         //loop through the list of student objects
         System.out.println("\n List of students and their usernames with their respective modules and courses" );
         for (Student student : listStudent) {
-            System.out.println(student.getName() + "  " + student.getUserName());
+            System.out.println("\n Student:  "+ student.getName() + "  " + student.getUserName());
             //loop through the list of module objects
             for (Module m : listModules) {
-                //print out the modules
+                //check if module is associated with the student
                 if (m.getStudents().contains(student)) {
-                    System.out.println(" " + m.getModuleName() );
+                    //print out the modules associated with the student
+                    System.out.println("  Respective Module :  " + m.getModuleName() );
                 }
             }
-        }
-
-        System.out.println("\n List of modules with their respective courses");
-        for (Module module: listModules){
-            System.out.println(module.getModuleName());
-            for (Course course : listCourses) {
-                //check if module belongs to the course
-                if (course.getModules().contains(module)) {
-                    System.out.println(" "+course.getCourseName());
+            //loop through the list of course objects
+            for (Course c : listCourses){
+                //check if course is registered to the student
+                if(c.getStudents().contains(student)){
+                    //print out the courses associated with the student
+                    System.out.println("   Courses Registered for : "+c.getCourseName());
                 }
             }
         }
