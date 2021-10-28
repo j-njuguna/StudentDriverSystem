@@ -67,7 +67,6 @@ public class StudentDriver {
         //add courses to modules
         softwareEngineering.addCourses(computerScience);
         machineLearning.addCourses(computerScience);
-        //informationRetrieval.addCourses(engineering);
         professionalSkills.addCourses(engineering);
         systemsModelling.addCourses(informationTechnology);
         informationRetrieval.addCourses(informationTechnology);
